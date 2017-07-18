@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataBaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DataBaseModelStoreContainer">
+    <EntitySet Name="UsuarioSet" EntityType="DataBaseModel.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompraSet" EntityType="DataBaseModel.Store.CompraSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LibroSet" EntityType="DataBaseModel.Store.LibroSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AutorSet" EntityType="DataBaseModel.Store.AutorSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompraLibro" EntityType="DataBaseModel.Store.CompraLibro" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="AutorLibro" Association="DataBaseModel.Store.AutorLibro">
+      <End Role="Autor" EntitySet="AutorSet" />
+      <End Role="Libro" EntitySet="LibroSet" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioCompra" Association="DataBaseModel.Store.UsuarioCompra">
+      <End Role="Usuario" EntitySet="UsuarioSet" />
+      <End Role="Compra" EntitySet="CompraSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraLibro_Compra" Association="DataBaseModel.Store.FK_CompraLibro_Compra">
+      <End Role="Compra" EntitySet="CompraSet" />
+      <End Role="CompraLibro" EntitySet="CompraLibro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraLibro_Libro" Association="DataBaseModel.Store.FK_CompraLibro_Libro">
+      <End Role="Libro" EntitySet="LibroSet" />
+      <End Role="CompraLibro" EntitySet="CompraLibro" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UsuarioSet">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nickname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="nombresUsuario" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="apellidosUsuario" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompraSet">
+    <Key>
+      <PropertyRef Name="idCompra" />
+    </Key>
+    <Property Name="idCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subtotal" Type="decimal" Nullable="false" />
+    <Property Name="iva" Type="decimal" Nullable="false" />
+    <Property Name="total" Type="decimal" Nullable="false" />
+    <Property Name="Usuario_idUsuario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LibroSet">
+    <Key>
+      <PropertyRef Name="idLibro" />
+    </Key>
+    <Property Name="idLibro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tituloLibro" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="categoriaLibro" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="editorialLibro" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ISBN" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="precioLibro" Type="decimal" Nullable="false" />
+    <Property Name="Autor_idAutor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AutorSet">
+    <Key>
+      <PropertyRef Name="idAutor" />
+    </Key>
+    <Property Name="idAutor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombresAutor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="apellidosAutor" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompraLibro">
+    <Key>
+      <PropertyRef Name="Compra_idCompra" />
+      <PropertyRef Name="Libro_idLibro" />
+    </Key>
+    <Property Name="Compra_idCompra" Type="int" Nullable="false" />
+    <Property Name="Libro_idLibro" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="AutorLibro">
+    <End Role="Autor" Type="DataBaseModel.Store.AutorSet" Multiplicity="1" />
+    <End Role="Libro" Type="DataBaseModel.Store.LibroSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autor">
+        <PropertyRef Name="idAutor" />
+      </Principal>
+      <Dependent Role="Libro">
+        <PropertyRef Name="Autor_idAutor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioCompra">
+    <End Role="Usuario" Type="DataBaseModel.Store.UsuarioSet" Multiplicity="1" />
+    <End Role="Compra" Type="DataBaseModel.Store.CompraSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Compra">
+        <PropertyRef Name="Usuario_idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraLibro_Compra">
+    <End Role="Compra" Type="DataBaseModel.Store.CompraSet" Multiplicity="1" />
+    <End Role="CompraLibro" Type="DataBaseModel.Store.CompraLibro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compra">
+        <PropertyRef Name="idCompra" />
+      </Principal>
+      <Dependent Role="CompraLibro">
+        <PropertyRef Name="Compra_idCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraLibro_Libro">
+    <End Role="CompraLibro" Type="DataBaseModel.Store.CompraLibro" Multiplicity="*" />
+    <End Role="Libro" Type="DataBaseModel.Store.LibroSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Libro">
+        <PropertyRef Name="idLibro" />
+      </Principal>
+      <Dependent Role="CompraLibro">
+        <PropertyRef Name="Libro_idLibro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataBaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataBaseModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UsuarioSet" EntityType="DataBaseModel.Usuario" />
+          <EntitySet Name="CompraSet" EntityType="DataBaseModel.Compra" />
+          <EntitySet Name="LibroSet" EntityType="DataBaseModel.Libro" />
+          <EntitySet Name="AutorSet" EntityType="DataBaseModel.Autor" />
+          <AssociationSet Name="AutorLibro" Association="DataBaseModel.AutorLibro">
+            <End Role="Autor" EntitySet="AutorSet" />
+            <End Role="Libro" EntitySet="LibroSet" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioCompra" Association="DataBaseModel.UsuarioCompra">
+            <End Role="Usuario" EntitySet="UsuarioSet" />
+            <End Role="Compra" EntitySet="CompraSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompraLibro" Association="DataBaseModel.CompraLibro">
+            <End Role="Compra" EntitySet="CompraSet" />
+            <End Role="Libro" EntitySet="LibroSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nickname" Type="String" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" />
+          <Property Name="nombresUsuario" Type="String" Nullable="false" />
+          <Property Name="apellidosUsuario" Type="String" Nullable="false" />
+          <NavigationProperty Name="Compra" Relationship="DataBaseModel.UsuarioCompra" FromRole="Usuario" ToRole="Compra" />
+        </EntityType>
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="idCompra" />
+          </Key>
+          <Property Name="idCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subtotal" Type="Decimal" Nullable="false" />
+          <Property Name="iva" Type="Decimal" Nullable="false" />
+          <Property Name="total" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="DataBaseModel.UsuarioCompra" FromRole="Compra" ToRole="Usuario" />
+          <NavigationProperty Name="Libro" Relationship="DataBaseModel.CompraLibro" FromRole="Compra" ToRole="Libro" />
+        </EntityType>
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="idLibro" />
+          </Key>
+          <Property Name="idLibro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tituloLibro" Type="String" Nullable="false" />
+          <Property Name="categoriaLibro" Type="String" Nullable="false" />
+          <Property Name="editorialLibro" Type="String" Nullable="false" />
+          <Property Name="ISBN" Type="String" Nullable="false" />
+          <Property Name="precioLibro" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Autor" Relationship="DataBaseModel.AutorLibro" FromRole="Libro" ToRole="Autor" />
+          <NavigationProperty Name="Compra" Relationship="DataBaseModel.CompraLibro" FromRole="Libro" ToRole="Compra" />
+        </EntityType>
+        <EntityType Name="Autor">
+          <Key>
+            <PropertyRef Name="idAutor" />
+          </Key>
+          <Property Name="idAutor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombresAutor" Type="String" Nullable="false" />
+          <Property Name="apellidosAutor" Type="String" Nullable="false" />
+          <NavigationProperty Name="Libro" Relationship="DataBaseModel.AutorLibro" FromRole="Autor" ToRole="Libro" />
+        </EntityType>
+        <Association Name="AutorLibro">
+          <End Type="DataBaseModel.Autor" Role="Autor" Multiplicity="1" />
+          <End Type="DataBaseModel.Libro" Role="Libro" Multiplicity="*" />
+        </Association>
+        <Association Name="UsuarioCompra">
+          <End Type="DataBaseModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="DataBaseModel.Compra" Role="Compra" Multiplicity="*" />
+        </Association>
+        <Association Name="CompraLibro">
+          <End Type="DataBaseModel.Compra" Role="Compra" Multiplicity="*" />
+          <End Type="DataBaseModel.Libro" Role="Libro" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataBaseModelStoreContainer" CdmEntityContainer="DataBaseModelContainer">
+    <EntitySetMapping Name="UsuarioSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DataBaseModel.Usuario)">
+        <MappingFragment StoreEntitySet="UsuarioSet">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="nombresUsuario" ColumnName="nombresUsuario" />
+          <ScalarProperty Name="apellidosUsuario" ColumnName="apellidosUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompraSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DataBaseModel.Compra)">
+        <MappingFragment StoreEntitySet="CompraSet">
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="iva" ColumnName="iva" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LibroSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DataBaseModel.Libro)">
+        <MappingFragment StoreEntitySet="LibroSet">
+          <ScalarProperty Name="idLibro" ColumnName="idLibro" />
+          <ScalarProperty Name="tituloLibro" ColumnName="tituloLibro" />
+          <ScalarProperty Name="categoriaLibro" ColumnName="categoriaLibro" />
+          <ScalarProperty Name="editorialLibro" ColumnName="editorialLibro" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="precioLibro" ColumnName="precioLibro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AutorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(DataBaseModel.Autor)">
+        <MappingFragment StoreEntitySet="AutorSet">
+          <ScalarProperty Name="idAutor" ColumnName="idAutor" />
+          <ScalarProperty Name="nombresAutor" ColumnName="nombresAutor" />
+          <ScalarProperty Name="apellidosAutor" ColumnName="apellidosAutor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AutorLibro" TypeName="DataBaseModel.AutorLibro" StoreEntitySet="LibroSet">
+      <EndProperty Name="Autor">
+        <ScalarProperty Name="idAutor" ColumnName="Autor_idAutor" />
+      </EndProperty>
+      <EndProperty Name="Libro">
+        <ScalarProperty Name="idLibro" ColumnName="idLibro" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UsuarioCompra" TypeName="DataBaseModel.UsuarioCompra" StoreEntitySet="CompraSet">
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="idUsuario" ColumnName="Usuario_idUsuario" />
+      </EndProperty>
+      <EndProperty Name="Compra">
+        <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CompraLibro" TypeName="DataBaseModel.CompraLibro" StoreEntitySet="CompraLibro">
+      <EndProperty Name="Compra">
+        <ScalarProperty Name="idCompra" ColumnName="Compra_idCompra" />
+      </EndProperty>
+      <EndProperty Name="Libro">
+        <ScalarProperty Name="idLibro" ColumnName="Libro_idLibro" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f75465e61d1c4e42b50b6c3633494006" Name="Diagram1">
+        <EntityTypeShape EntityType="DataBaseModel.Usuario" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Compra" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Libro" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Autor" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="DataBaseModel.AutorLibro" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBaseModel.UsuarioCompra" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBaseModel.CompraLibro" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
