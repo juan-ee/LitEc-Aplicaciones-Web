@@ -156,6 +156,10 @@
       <DependentUpon>LitecModelContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LibroController.cs" />
+    <Compile Include="Libro.cs">
+      <DependentUpon>LitecModelContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="LitecDataBaseModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -163,9 +167,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Libro.cs">
-      <DependentUpon>LitecModelContext.tt</DependentUpon>
     </Compile>
     <Compile Include="LitecModelContext.Context.cs">
       <AutoGen>True</AutoGen>
@@ -193,6 +194,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="LitecDataBaseModel.edmx.sql" />
     <Content Include="LitecModelContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LitecModelContext.Context.cs</LastGenOutput>
@@ -237,6 +239,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Libro\Create.cshtml" />
+    <Content Include="Views\Libro\Delete.cshtml" />
+    <Content Include="Views\Libro\Details.cshtml" />
+    <Content Include="Views\Libro\Edit.cshtml" />
+    <Content Include="Views\Libro\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

@@ -1,0 +1,38 @@
+﻿@model LitEc.Libro
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container opaque1">
+    <h2>Detalles</h2>
+    <br>
+    <div class="row">
+        <div class="col-sm-5">
+            @{string path =  Model.Autor.nombresAutor + " " + Model.Autor.apellidosAutor + "/" + Model.tituloLibro + ".png"; }
+            <img src="~/images/library/@path" height="400" width="300">
+            <br />
+            <h2>Descripción</h2>
+            <p>@Html.DisplayFor(model => model.descripcionLibro)</p>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <label style="font-size: 20px;">Titulo:</label>
+            <h6 style="font-size: 20px;"> @Html.DisplayFor(model => model.tituloLibro)</h6>
+            <label style="font-size: 20px;">Autor:</label>
+            <h6 style="font-size: 20px;"> @Html.DisplayFor(model => model.Autor.nombresAutor) @Html.DisplayFor(model => model.Autor.apellidosAutor)</h6>
+            <label style="font-size: 20px;">Editorial:</label>
+            <h6 style="font-size: 20px;"> @Html.DisplayFor(model => model.editorialLibro)</h6>
+            <label style="font-size: 20px;">Precio:</label>
+            <h6 style="font-size: 20px;"> $ @Html.DisplayFor(model => model.precioLibro)</h6>
+            <br />
+            <button class="btn btn-lg btn-success">Añadir al carrito</button>
+            <br /><br /><br /><br /><br /><br />            
+        </div>
+        <br />
+    </div>
+    <br />
+    @Html.ActionLink("Regresar", "Index")
+</div>
+

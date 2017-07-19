@@ -58,6 +58,7 @@
     <Property Name="editorialLibro" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ISBN" Type="nvarchar(max)" Nullable="false" />
     <Property Name="precioLibro" Type="decimal" Nullable="false" />
+    <Property Name="descripcionLibro" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Autor_idAutor" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AutorSet">
@@ -180,6 +181,7 @@
           <Property Name="precioLibro" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="Autor" Relationship="DataBaseModel.AutorLibro" FromRole="Libro" ToRole="Autor" />
           <NavigationProperty Name="Compra" Relationship="DataBaseModel.CompraLibro" FromRole="Libro" ToRole="Compra" />
+          <Property Name="descripcionLibro" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Autor">
           <Key>
@@ -238,6 +240,7 @@
           <ScalarProperty Name="editorialLibro" ColumnName="editorialLibro" />
           <ScalarProperty Name="ISBN" ColumnName="ISBN" />
           <ScalarProperty Name="precioLibro" ColumnName="precioLibro" />
+          <ScalarProperty Name="descripcionLibro" ColumnName="descripcionLibro" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -298,7 +301,7 @@
         <EntityTypeShape EntityType="DataBaseModel.Usuario" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DataBaseModel.Compra" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DataBaseModel.Libro" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataBaseModel.Autor" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBaseModel.Autor" Width="1.5" PointX="2.625" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="DataBaseModel.AutorLibro" ManuallyRouted="false" />
         <AssociationConnector Association="DataBaseModel.UsuarioCompra" ManuallyRouted="false" />
         <AssociationConnector Association="DataBaseModel.CompraLibro" ManuallyRouted="false" />

@@ -26,6 +26,7 @@ namespace LitEc
         public string editorialLibro { get; set; }
         public string ISBN { get; set; }
         public decimal precioLibro { get; set; }
+        public string descripcionLibro { get; set; }
     
         public virtual Autor Autor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

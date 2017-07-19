@@ -1,0 +1,34 @@
+﻿@model IEnumerable<LitEc.Libro>
+
+@{
+    ViewBag.Title = "Libros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Biblioteca</h2>
+
+<div class="container">
+    @foreach (var libro in Model)
+    {
+        <div class="col-sm-4 opaque1">
+            <br>
+            @{string path = libro.Autor.nombresAutor + " " + libro.Autor.apellidosAutor + "/" + libro.tituloLibro + ".png"; }
+            <img src="~/images/library/@path" width="200" height="300">
+            <br />
+            <br />
+            <div class="div" style="margin: 5px 5px 5px 5px;">
+                <label>Autor:</label>                
+                <h4>@Html.DisplayFor(modelItem => libro.Autor.nombresAutor) @Html.DisplayFor(modelItem => libro.Autor.apellidosAutor)</h4>
+                <label>Titulo:</label>
+                <h4>@Html.DisplayFor(modelItem => libro.tituloLibro)</h4>                                
+                @Html.ActionLink("Detalles", "Details", new { id = libro.idLibro })
+            </div>
+            <br />
+            <br />
+        </div>
+    }
+    
+</div>
+
+
+
