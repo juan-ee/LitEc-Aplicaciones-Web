@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/18/2017 21:47:46
--- Generated from EDMX file: D:\Documentos\Visual Studio 2017\Projects\LitEc\LitEc\LitecDataBaseModel.edmx
+-- Date Created: 08/13/2017 17:41:26
+-- Generated from EDMX file: d:\documentos\visual studio 2017\Projects\LitEc\LitEc\LitecDataBaseModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [LiTecBD];
+USE [LitEcBD];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -57,10 +57,9 @@ GO
 -- Creating table 'UsuarioSet'
 CREATE TABLE [dbo].[UsuarioSet] (
     [idUsuario] int IDENTITY(1,1) NOT NULL,
-    [nickname] nvarchar(max)  NOT NULL,
+    [email] nvarchar(max)  NOT NULL,
     [password] nvarchar(max)  NOT NULL,
-    [nombresUsuario] nvarchar(max)  NOT NULL,
-    [apellidosUsuario] nvarchar(max)  NOT NULL
+    [userName] nvarchar(max)  NOT NULL
 );
 GO
 
