@@ -10,7 +10,7 @@
     <br>
     <div class="row">
         <div class="col-sm-5">
-            @{string path =  Model.Autor.nombresAutor + " " + Model.Autor.apellidosAutor + "/" + Model.tituloLibro + ".png"; }
+            @{string path = Model.Autor.nombresAutor + " " + Model.Autor.apellidosAutor + "/" + Model.tituloLibro + ".png"; }
             <img src="~/images/library/@path" height="400" width="300">
             <br />
             <h2>Descripción</h2>
@@ -26,13 +26,28 @@
             <h6 style="font-size: 20px;"> @Html.DisplayFor(model => model.editorialLibro)</h6>
             <label style="font-size: 20px;">Precio:</label>
             <h6 style="font-size: 20px;"> $ @Html.DisplayFor(model => model.precioLibro)</h6>
-            <br />
-            <button class="btn btn-lg btn-success">Añadir al carrito</button>
-            <br /><br /><br /><br /><br /><br />            
+            <br />       
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("AgregarAlCarrito", "Carrito", new { Model }))
+                {
+                    <input type="hidden" name="idLibro" value="@Model.idLibro" />
+                    <div>
+                        <input type="submit" class="btn btn-lg btn-success" value="Añadir al carrito" />
+                    </div>
+                }
+            }
+            else
+            {                
+                <button class="btn btn-lg btn-success" onclick="location.href='@Url.Action("Login", "Account")'">Añadir al carrito</button>
+                Session["TempLibro"]= Model.idLibro;
+            }            
+                        
+            <br /><br /><br /><br /><br /><br />
         </div>
         <br />
     </div>
     <br />
     @Html.ActionLink("Regresar", "Index")
 </div>
-

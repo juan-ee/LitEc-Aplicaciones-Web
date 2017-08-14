@@ -6,14 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using LitEc;
+using LitEc.Models;
 
 namespace LitEc.Controllers
 {
     public class LibroController : Controller
     {
         private DataBaseModelContainer db = new DataBaseModelContainer();
-
+        
         // GET: Libro
         public ActionResult Index()
         {
@@ -125,3 +125,4 @@ namespace LitEc.Controllers
         }
     }
 }
+

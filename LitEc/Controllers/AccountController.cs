@@ -81,6 +81,10 @@ namespace LitEc.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (Session["TempLibro"] != null)
+                    {
+                        return RedirectToAction("AgregarAlCarrito", "Carrito",new {idLibro= Session["TempLibro"]});
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

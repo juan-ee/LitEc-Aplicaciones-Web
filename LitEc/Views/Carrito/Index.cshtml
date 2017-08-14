@@ -1,0 +1,13 @@
+﻿@using LitEc.Models
+@{
+    ViewBag.Title = "Carrito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (KeyValuePair<int, CarritoCompras.ItemCarrito> item in CarritoCompras.Instance.Items)
+{
+    <h1>@item</h1>
+    <h1>@item.Value.libro.tituloLibro</h1>
+    @*<h5>@item.Value.cantidad</h5>*@    
+    <br/>
+}
