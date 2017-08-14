@@ -2,12 +2,117 @@
 @{
     ViewBag.Title = "Carrito";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    CarritoCompras carrito = (CarritoCompras)Session["CarritoCompras"];
 }
 
-@foreach (KeyValuePair<int, CarritoCompras.ItemCarrito> item in CarritoCompras.Instance.Items)
-{
-    <h1>@item</h1>
-    <h1>@item.Value.libro.tituloLibro</h1>
-    @*<h5>@item.Value.cantidad</h5>*@    
-    <br/>
-}
+<script src="/Scripts/jquery-1.4.4.min.js"
+        type="text/javascript"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@*<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".RemoveLink").click(function () {
+            // Get the id from the link
+            var recordToDelete = $(this).attr("data-id");
+            if (recordToDelete != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/RemoveFromCart", {"id": recordToDelete },
+                    function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeOut('slow');
+                        } else {
+                            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        }
+                        $('#cart-total').text(data.CartTotal);
+                        $('#update-message').text(data.Message);
+                        $('#cart-status').text('Cart (' + data.CartCount + ')');
+                    });
+            }
+        });
+    });
+</script>*@
+
+<div class="container opaque1">
+    
+    
+    @if (carrito.Items.Count == 0)
+    {
+        <br /><br /><br /><br />
+        <div align="center">
+            <div class="row"><h1>No hay libros en el carrito</h1></div>            
+            <br />
+            <div class="row"><img src="~/images/empty_cart.jpeg" alt="Empty ShoppingCart"/></div>                        
+        </div>                
+    }
+    else
+    {
+        <h1>Carrito</h1>
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th><h3>Portada</h3></th>
+                    <th><h3>Título</h3></th>
+                    <th><h3>Autor</h3></th>
+                    <th><h3>Precio</h3></th>
+                    @*<th><h3>Unidades</h3></th>*@
+                    @*<th><h3>Total</h3></th>*@
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (KeyValuePair<int, Libro> item in carrito.Items)
+                {                    
+                        Libro libro = item.Value;
+                        string path = libro.Autor.nombresAutor + " " + libro.Autor.apellidosAutor + "/" + libro.tituloLibro + ".png";
+                    
+                    <tr>
+                        
+                        <td><img src="~/images/library/@path" width="50" height="80"></td>
+                        <td><h4> @libro.tituloLibro</h4></td>
+                        <td><h4>@libro.Autor.nombresAutor @libro.Autor.apellidosAutor</h4></td>
+                        <td><h4> @String.Format("{0:0.00}", @libro.precioLibro)</h4></td>                        
+                        @*<td>
+                            <div class="col-sm-3">
+                                <input type="number" min="1" max="100" value="@item.Value.cantidad">
+                            </div>
+                        </td>*@
+                        @*<td><h4> @item.Value.total</h4></td>*@                        
+                        <td>                            
+                            <button class="btn btn-sm btn-default" onclick="location.href='@Url.Action("Details", "Libro",new {id=libro.idLibro})'">Detalles</button>  <button class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("QuitarDelCarrito", "Carrito",new {idLibro=libro.idLibro})'">Quitar</button>                                                        
+                        </td>
+                    </tr>
+                }
+                
+            </tbody>
+        </table>
+        <hr>
+        <div class="row">
+            <div class="col-sm-8">
+            </div>
+            <div class="col-sm-4">
+                <h3 style="font-size: 20px;"> <span><label>Total: </label></span> $ @String.Format("{0:0.00}", @carrito.sumaTotal)</h3>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2">                
+                <button class="btn btn-lg btn-info" onclick="location.href='@Url.Action("Index", "Libro")'">Ver más libros</button>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2">
+                <button class="btn btn-lg btn-success">$Realizar Compra$</button>
+
+            </div>
+            <div class="col-sm-3"></div>
+
+        </div>
+        <br>
+    }                
+
+</div>

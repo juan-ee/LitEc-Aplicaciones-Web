@@ -16,9 +16,15 @@ namespace LitEc.Controllers
         
         public ActionResult AgregarAlCarrito(int idLibro)
         { 
-            CarritoCompras.Instance.AddItem(new DataBaseModelContainer().LibroSet.Find(idLibro));            
-            return RedirectToAction("Index", "Carrito");
+            ((CarritoCompras)Session["CarritoCompras"]).AddItem(new DataBaseModelContainer().LibroSet.Find(idLibro));            
+            return View("Index");
 
+        }
+
+        public ActionResult QuitarDelCarrito(int idLibro)
+        {
+            ((CarritoCompras)Session["CarritoCompras"]).RemoveItem(new DataBaseModelContainer().LibroSet.Find(idLibro));
+            return View("Index");
         }
 
     }
