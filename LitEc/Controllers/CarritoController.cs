@@ -53,7 +53,7 @@ namespace LitEc.Controllers
                 );
 
             }
-
+            carrito.Items.Clear();
             return RedirectToAction("Index", "Manage");
 
             //db.Entry(usuario).State = EntityState.Modified;            
