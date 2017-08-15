@@ -1,0 +1,66 @@
+﻿@model List<LitEc.Models.LibroViewModel>
+@{
+    ViewBag.Title = "Mi Cuenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<div class="container opaque1">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+            <div class="well profile" style="color: #0f0f0f">
+                <div class="col-sm-12">
+                    <div class="col-xs-12 col-sm-8">
+                        <p><strong>Correo: </strong> @User.Identity.Name</p>
+                        <p>
+                            <strong>Preferencias: </strong>
+                            <span class="tags">Suspenso</span>
+                            <span class="tags">Terror</span>
+                            <span class="tags">Ciencia Ficcion</span>
+                        </p>
+                        <p><strong>Total de libros: </strong> @Model.Count() </p>
+                        <a class="btn btn-success " onclick="location.href='@Url.Action("Index", "Libro")'"><span class="fa fa-plus-circle"></span> Comprar Mas</a>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-4 text-center">
+                        <figure>
+                            <img src="~/images/perfil.jpeg" alt="" class="img-circle img-responsive">
+                            <br />
+                        </figure>
+                        <p>
+                            @Html.ActionLink("Cambiar la contraseña", "ChangePassword","Manage")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <h2>Mis Libros</h2>
+    <hr />    
+        @foreach (var libro in Model.ToList())
+        {
+            <div class="col-sm-4 opaque1">
+                <br>
+                @{string path = libro.nombreAutor + "/" + libro.libro.tituloLibro + ".png"; }
+                <img src="~/images/library/@path" width="200" height="300">
+                <br />
+                <br />
+                <div class="div" style="margin: 5px 5px 5px 5px;">
+                    <label>Autor:</label>
+                    <h4>@libro.nombreAutor</h4>
+                    <label>Titulo:</label>
+                    <h4>@Html.DisplayFor(modelItem => libro.libro.tituloLibro)</h4>
+                    @Html.ActionLink("Leer", "Details","Libro" ,new { id = libro.libro.idLibro },null)                    
+                </div>
+                <br />
+                <br />
+            </div>
+         }
+    
+</div>
+
+

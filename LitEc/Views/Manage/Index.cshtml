@@ -1,38 +1,18 @@
-﻿@model LitEc.Models.IndexViewModel
+﻿
 @{
     ViewBag.Title = "Mi Cuenta";
 }
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 
-<h2>@ViewBag.Title.</h2>
-
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>    
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Contraseña:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Cambiar la contraseña", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Crear", "SetPassword")
-            }
-            ]
-        </dd>     
-    </dl>
-</div>
 
 <div class="container opaque1">
+    <h2>@ViewBag.Title</h2>
+    <hr />
     <div class="row">
         <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-            <h1>Informacion Personal</h1>
             <div class="well profile" style="color: #0f0f0f">
                 <div class="col-sm-12">
-                    <div class="col-xs-12 col-sm-8">                        
+                    <div class="col-xs-12 col-sm-8">
                         <p><strong>Correo: </strong> @User.Identity.Name</p>
                         <p>
                             <strong>Preferencias: </strong>
@@ -40,24 +20,26 @@
                             <span class="tags">Terror</span>
                             <span class="tags">Ciencia Ficcion</span>
                         </p>
+                        <p><strong>Total de libros: </strong> 5 </p>
+                        <a class="btn btn-success " onclick="location.href='@Url.Action("Index", "Libro")'"><span class="fa fa-plus-circle"></span> Comprar Mas</a>
+
                     </div>
                     <div class="col-xs-12 col-sm-4 text-center">
                         <figure>
-                            <img src="assets/images/perfil.jpeg" alt="" class="img-circle img-responsive">
+                            <img src="~/images/perfil.jpeg" alt="" class="img-circle img-responsive">
                             <br />
                         </figure>
-                    </div>
-                </div>
-                <div class="col-xs-12 divider text-center">
-                    <div class="col-xs-12 col-sm-4 emphasis">
-                        <h2><strong> </strong></h2>
-                        <p><small>Compras realizadas</small></p>
-                        <a class="btn btn-success " ><span class="fa fa-plus-circle"></span> Comprar Mas Libros</a>
+                        <p>                            
+                           @Html.ActionLink("Cambiar la contraseña", "ChangePassword")                 
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <br />    
-    </div>
+    <br />
+    <h2>Mis Libros</h2>
+    <hr />
+</div>
+
 

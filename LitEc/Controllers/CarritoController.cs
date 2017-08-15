@@ -31,8 +31,6 @@ namespace LitEc.Controllers
 
         public ActionResult RealizarCompra()
         {
-            
-
             var usuario = db.UsuarioSet.Where(us => us.userName == User.Identity.Name).First();
             int idUsuario = usuario.idUsuario;
             db.Entry(usuario).State = EntityState.Detached;
@@ -54,7 +52,8 @@ namespace LitEc.Controllers
 
             }
             carrito.Items.Clear();
-            return RedirectToAction("Index", "Manage");
+            carrito.sumaTotal = 0;
+            return RedirectToAction("Info", "Usuario");
 
             //db.Entry(usuario).State = EntityState.Modified;            
             //return RedirectToAction("Index","Manage");
