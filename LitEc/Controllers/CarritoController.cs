@@ -55,6 +55,7 @@ namespace LitEc.Controllers
             carrito.sumaTotal = 0;
             return RedirectToAction("Info", "Usuario");
 
+
             //db.Entry(usuario).State = EntityState.Modified;            
             //return RedirectToAction("Index","Manage");
 
