@@ -54,7 +54,8 @@
                     <h4>@libro.nombreAutor</h4>
                     <label>Titulo:</label>
                     <h4>@Html.DisplayFor(modelItem => libro.libro.tituloLibro)</h4>
-                    @Html.ActionLink("Leer", "Details","Libro" ,new { id = libro.libro.idLibro },null)                    
+                    @Html.ActionLink("Leer", "Leer","Libro" ,new { id = libro.libro.idLibro },null)   
+                  
                 </div>
                 <br />
                 <br />

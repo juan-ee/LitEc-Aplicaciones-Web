@@ -1,0 +1,36 @@
+﻿@model LitEc.Libro
+@{
+    ViewBag.Title = "Leer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/misestilos.css">
+<div class="container opaque1">
+    <h2>@{string path = "/PDFs/" +Model.idLibro + ".pdf"; }</h2>
+    <br>
+    <div class="row">
+        <div class="col-sm-9">
+           
+            <embed src="@path">
+           
+        </div>
+
+        <div class="col-sm-3">
+            <label style="font-size: 20px;">Titulo:</label>
+            <h6 style="font-size: 20px;"> @Html.DisplayFor(model => model.tituloLibro)</h6>
+            <label style="font-size: 20px;">Autor:</label>
+            <h6 style="font-size: 20px;"> @Html.DisplayFor(model => model.Autor.nombresAutor) @Html.DisplayFor(model => model.Autor.apellidosAutor)</h6>
+            <label style="font-size: 20px;">Editorial:</label>
+            <h6 style="font-size: 20px;"> @Html.DisplayFor(model => model.editorialLibro)</h6>
+            <label style="font-size: 20px;">Path:</label>
+            <h6 style="font-size: 20px;"> @path</h6>
+
+
+            <br /><br /><br /><br /><br /><br />
+        </div>
+        <br />
+    </div>
+    <br />
+  @Html.ActionLink("Ver más libros", "Info", "Usuario")
+</div>
+

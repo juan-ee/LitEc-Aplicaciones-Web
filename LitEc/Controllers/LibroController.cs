@@ -104,6 +104,20 @@ namespace LitEc.Controllers
             return View(libro);
         }
 
+        public ActionResult Leer(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Libro libro = db.LibroSet.Find(id);
+            if (libro == null)
+            {
+                return HttpNotFound();
+            }
+            return View(libro);
+        }
+
         // POST: Libro/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

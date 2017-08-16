@@ -239,6 +239,7 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\misestilos.css" />
     <Content Include="Content\sweetalert2.min.css" />
     <Content Include="dbo.AutorSet.data.sql" />
     <Content Include="dbo.LibroSet.data.sql" />
@@ -275,6 +276,12 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LitecDataBaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="PDFs\4.pdf" />
+    <Content Include="PDFs\1.pdf" />
+    <Content Include="PDFs\3.pdf" />
+    <Content Include="PDFs\9.pdf" />
+    <Content Include="PDFs\10.pdf" />
+    <Content Include="PDFs\5.pdf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -322,6 +329,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Carrito\Index.cshtml" />
     <Content Include="Views\Usuario\Info.cshtml" />
+    <Content Include="Views\Libro\Leer.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
